@@ -1,0 +1,17 @@
+# Render Blueprint for a permanent WaveChat deployment.
+# Render disks require a paid instance type (Starter or higher).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: wavechat
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    healthCheckPath: /api/health
+    envVars:
+      - key: WAVECHAT_DATA
+        value: /data
+    disk:
+      name: wavechat-data
+      mountPath: /data
+      sizeGB: 1
